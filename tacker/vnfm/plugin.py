@@ -350,7 +350,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         vnf_dict = self._create_vnf_pre(
             context, vnf) if not vnf.get('id') else vnf
         vnf_id = vnf_dict['id']
-        LOG.debug('ha ha ha vnf_dict %s', vnf_dict)
+        LOG.debug('hi hai hi vnf_dict %s', vnf_dict)
         #LOG.debug('vnf_dict %s', vnf_dict)
         if driver_name == 'openstack':
             self.mgmt_create_pre(context, vnf_dict)
