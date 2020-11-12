@@ -345,6 +345,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         return vim_res
 
     def _create_vnf(self, context, vnf, vim_auth, driver_name):
+        print('enter _create_vnf')
         vnf_dict = self._create_vnf_pre(
             context, vnf) if not vnf.get('id') else vnf
         vnf_id = vnf_dict['id']
