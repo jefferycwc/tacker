@@ -417,7 +417,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
                 self._report_deprecated_yaml_str()
 
         vnf_dict = self._create_vnf(context, vnf_info, vim_auth, infra_driver)
-
+        LOG.debug('hahaha vnf description:%s',vnf_dict['description'])
         def create_vnf_wait():
             self._create_vnf_wait(context, vnf_dict, vim_auth, infra_driver)
 
