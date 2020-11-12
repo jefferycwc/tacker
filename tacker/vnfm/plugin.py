@@ -374,7 +374,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
     def create_vnf(self, context, vnf):
         vnf_info = vnf['vnf']
         name = vnf_info['name']
-
+        print('vnf name: {}'.format(name))
         # if vnfd_template specified, create vnfd from template
         # create template dictionary structure same as needed in create_vnfd()
         if vnf_info.get('vnfd_template'):
