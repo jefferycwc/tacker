@@ -433,10 +433,8 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         pid = os.fork()
         if pid ==0:
             LOG.debug('pid: %d',os.getpid())
-            try:
-                amf_detect.main()
-            except Exception as e:
-                LOG.exception("call detect driver error: %s", str(e))
+            os.chdir("/root/tacker/tacker/vnfm/fault_management/master_node")
+            os.system('python amf_detect.py')
         return vnf_dict
 
     # not for wsgi, but for service to create hosting vnf
