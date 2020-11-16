@@ -440,7 +440,10 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
                 LOG.exception("Failed to activate monitor driver :%s", six.text_type(err))
             LOG.debug('current path:%s',os.getcwd())
             os.system('python amf_detect.py')'''
-        amf_detect.main()
+        try:
+            amf_detect.main()
+        except Exception as err:
+                LOG.exception("Failed to activate monitor driver :%s", six.text_type(err))    
         return vnf_dict
 
     # not for wsgi, but for service to create hosting vnf
