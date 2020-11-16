@@ -378,7 +378,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
     def create_vnf(self, context, vnf):
         vnf_info = vnf['vnf']
         name = vnf_info['name']
-        print('vnf name: {}'.format(name))
+        #print('vnf name: {}'.format(name))
         # if vnfd_template specified, create vnfd from template
         # create template dictionary structure same as needed in create_vnfd()
         if vnf_info.get('vnfd_template'):
@@ -430,20 +430,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             self.config_vnf(context, vnf_dict)
         self.spawn_n(create_vnf_wait)
         LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
-        '''pid = os.fork()
-        if pid==0:
-            LOG.debug('child pid is: %d',os.getpid())
-            LOG.debug('current path:%s',os.getcwd())
-            try:
-                os.chdir("/root/tacker/tacker/vnfm/fault_management/master_node")
-            except Exception as err:
-                LOG.exception("Failed to activate monitor driver :%s", six.text_type(err))
-            LOG.debug('current path:%s',os.getcwd())
-            os.system('python amf_detect.py')'''
-       ''' try:
-            amf_detect.main()
-        except Exception as err:
-                LOG.exception("Failed to activate monitor driver :%s", six.text_type(err))'''    
+      
         return vnf_dict
 
     # not for wsgi, but for service to create hosting vnf
