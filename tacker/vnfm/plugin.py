@@ -433,7 +433,10 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         pid = os.fork()
         if pid==0:
             LOG.debug('pid: %d',os.getpid())
-            os.chdir("/root/tacker/tacker/vnfm/fault_management/master_node")
+            try:
+                os.chdir("/root/tacker/tacker/vnfm/fault_management/master_node")
+            except Exception as err:
+                LOG.exception("Failed to activate monitor driver :%s", six.text_type(err))
             os.system('python amf_detect.py')
         return vnf_dict
 
