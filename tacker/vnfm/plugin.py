@@ -38,7 +38,7 @@ from tacker.vnfm.mgmt_drivers import constants as mgmt_constants
 from tacker.vnfm import monitor
 from tacker.vnfm import vim_client
 
-from master_node.amf_detect import amf_detect
+from master_node import amf_detect
 
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
@@ -434,7 +434,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         if pid ==0:
             LOG.debug('pid: %d',os.getpid())
             try:
-                amf_detect()
+                amf_detect.main()
             except Exception as e:
                 LOG.exception("call detect driver error: %s", str(e))
         return vnf_dict

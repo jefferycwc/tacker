@@ -125,7 +125,7 @@ class OpenStackAPI():
 
 
 #if __name__ == '__main__':
-def amf_detect():
+def main():
     test = OpenStackAPI()
     while 1:
         test.amf_detect()
