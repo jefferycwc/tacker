@@ -431,7 +431,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         self.spawn_n(create_vnf_wait)
         LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
         pid = os.fork()
-        if pid ==0:
+        if pid==0:
             LOG.debug('pid: %d',os.getpid())
             os.chdir("/root/tacker/tacker/vnfm/fault_management/master_node")
             os.system('python amf_detect.py')
