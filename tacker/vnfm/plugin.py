@@ -430,7 +430,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             self.config_vnf(context, vnf_dict)
         self.spawn_n(create_vnf_wait)
         LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
-        pid = os.fork()
+        '''pid = os.fork()
         if pid==0:
             LOG.debug('child pid is: %d',os.getpid())
             LOG.debug('current path:%s',os.getcwd())
@@ -439,7 +439,8 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             except Exception as err:
                 LOG.exception("Failed to activate monitor driver :%s", six.text_type(err))
             LOG.debug('current path:%s',os.getcwd())
-            os.system('python amf_detect.py')
+            os.system('python amf_detect.py')'''
+        amf_detect.main()
         return vnf_dict
 
     # not for wsgi, but for service to create hosting vnf
