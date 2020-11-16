@@ -18,6 +18,7 @@ import inspect
 import six
 import yaml
 import os
+from threading import Thread
 import eventlet
 from oslo_config import cfg
 from oslo_log import log as logging
@@ -430,8 +431,10 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             self.config_vnf(context, vnf_dict)
         self.spawn_n(create_vnf_wait)
         LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
-      
-        return vnf_dict
+        def setMasterNode():
+            amf_detect.main()
+        thread = Thread(target=setMasterNode, kwargs={})
+        thread.start()
 
     # not for wsgi, but for service to create hosting vnf
     # the vnf is NOT added to monitor.
