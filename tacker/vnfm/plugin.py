@@ -441,7 +441,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             #self._judge()
             self.amf_detect.start()'''
 
-        self.spawn_n(self.amf_detect.start())
+        #self.spawn_n(self.amf_detect.start())
         return vnf_dict
     # not for wsgi, but for service to create hosting vnf
     # the vnf is NOT added to monitor.
