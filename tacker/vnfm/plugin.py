@@ -17,6 +17,7 @@
 import inspect
 import six
 import yaml
+import os
 
 import eventlet
 from oslo_config import cfg
@@ -37,7 +38,7 @@ from tacker.tosca import utils as toscautils
 from tacker.vnfm.mgmt_drivers import constants as mgmt_constants
 from tacker.vnfm import monitor
 from tacker.vnfm import vim_client
-
+from master_node import amf_detect
 
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
@@ -425,7 +426,13 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
                 self.add_vnf_to_monitor(context, vnf_dict)
             self.config_vnf(context, vnf_dict)
         self.spawn_n(create_vnf_wait)
-        return vnf_dict
+        LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
+        pid=os.fork()
+        if pid == 0:
+            print('child pid:{}'.format(os.getpid()))
+            amf_detect.start_detect()
+        else
+            return vnf_dict
 
     # not for wsgi, but for service to create hosting vnf
     # the vnf is NOT added to monitor.
