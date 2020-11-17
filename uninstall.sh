@@ -4,7 +4,7 @@ echo "rm all files"
 cat files.txt | xargs sudo rm -rf
 echo "start installing"
 python setup.py install
-echo " daemon-reload"
+echo "daemon-reload"
 systemctl daemon-reload
 echo "stop tacker service"
 systemctl stop tacker
