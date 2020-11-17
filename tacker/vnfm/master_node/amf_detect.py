@@ -4,7 +4,8 @@ import os
 import sys
 from params.openstack_params import OPENSTACK_IP,OS_AUTH_URL,OS_USER_DOMAIN_NAME,OS_USERNAME,OS_PASSWORD,OS_PROJECT_DOMAIN_NAME,OS_PROJECT_NAME
 from PublishHandler import publisher
-
+from oslo_log import log as logging
+LOG = logging.getLogger(__name__)
 class OpenStackAPI():
     def __init__(self):
         #super().__init__()
@@ -64,7 +65,7 @@ class OpenStackAPI():
         token = self.get_token()
         headers = {'X-Auth-Token': token}
         get_project_list_response = requests.get(get_project_list_url, headers=headers)
-        print("Get OpenStack project list status: " + str(get_project_list_response.status_code))
+        #print("Get OpenStack project list status: " + str(get_project_list_response.status_code))
         get_project_list_result = get_project_list_response.json()['projects']
         #print(get_project_list_result)
         for project in get_project_list_result:
@@ -126,5 +127,6 @@ class OpenStackAPI():
 
 if __name__ == '__main__':
     test = OpenStackAPI()
+    LOG.debug('enter amf detect')
     while 1:
         test.amf_detect()
