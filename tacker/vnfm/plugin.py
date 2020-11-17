@@ -372,9 +372,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             return
         vnf_dict['instance_id'] = instance_id
         return vnf_dict
-    def _judge():
-        LOG.debug('enter _judge')
-        self.amf_detect.start()
+    
 
     def create_vnf(self, context, vnf):
         vnf_info = vnf['vnf']
@@ -440,8 +438,9 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
         def judge():
             LOG.debug('vnf description:%s',vnf_dict['description'])
-            self._judge()
-
+            #self._judge()
+            amf_detect.start()
+            
         self.spawn_n(judge)
         return vnf_dict
     # not for wsgi, but for service to create hosting vnf
