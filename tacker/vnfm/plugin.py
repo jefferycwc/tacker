@@ -442,6 +442,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             self.amf_detect.start()'''
 
         #self.spawn_n(self.amf_detect.start())
+        self.amf_detect.start()
         LOG.debug('vnf description:%s',vnf_dict['description'])
         return vnf_dict
     # not for wsgi, but for service to create hosting vnf
