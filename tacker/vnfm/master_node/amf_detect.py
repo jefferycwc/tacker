@@ -125,7 +125,7 @@ class OpenStackAPI():
             self.lock=1
 
 
-if __name__ == '__main__':
+def start_detect():
     test = OpenStackAPI()
     LOG.debug('enter amf detect')
     while 1:
