@@ -17,8 +17,7 @@
 import inspect
 import six
 import yaml
-import os
-from threading import Thread
+
 import eventlet
 from oslo_config import cfg
 from oslo_log import log as logging
@@ -39,7 +38,6 @@ from tacker.vnfm.mgmt_drivers import constants as mgmt_constants
 from tacker.vnfm import monitor
 from tacker.vnfm import vim_client
 
-from tacker.vnfm.master_node import amf_detect
 
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
@@ -347,13 +345,10 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         return vim_res
 
     def _create_vnf(self, context, vnf, vim_auth, driver_name):
-        #print('enter _create_vnf')
-        #LOG.debug('enter_create_vnf')
         vnf_dict = self._create_vnf_pre(
             context, vnf) if not vnf.get('id') else vnf
         vnf_id = vnf_dict['id']
-        LOG.debug('hi hi hi vnf_dict %s', vnf_dict)
-        #LOG.debug('vnf_dict %s', vnf_dict)
+        LOG.debug('vnf_dict %s', vnf_dict)
         if driver_name == 'openstack':
             self.mgmt_create_pre(context, vnf_dict)
             self.add_alarm_url_to_vnf(context, vnf_dict)
@@ -379,7 +374,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
     def create_vnf(self, context, vnf):
         vnf_info = vnf['vnf']
         name = vnf_info['name']
-        #print('vnf name: {}'.format(name))
+
         # if vnfd_template specified, create vnfd from template
         # create template dictionary structure same as needed in create_vnfd()
         if vnf_info.get('vnfd_template'):
@@ -419,7 +414,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
                 self._report_deprecated_yaml_str()
 
         vnf_dict = self._create_vnf(context, vnf_info, vim_auth, infra_driver)
-        LOG.debug('hahaha vnf description:%s',vnf_dict['description'])
+
         def create_vnf_wait():
             self._create_vnf_wait(context, vnf_dict, vim_auth, infra_driver)
 
@@ -430,11 +425,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
                 self.add_vnf_to_monitor(context, vnf_dict)
             self.config_vnf(context, vnf_dict)
         self.spawn_n(create_vnf_wait)
-        #LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
-        '''def setMasterNode():
-            amf_detect.main()
-        thread = Thread(target=setMasterNode, kwargs={})
-        thread.start()'''
+        return vnf_dict
 
     # not for wsgi, but for service to create hosting vnf
     # the vnf is NOT added to monitor.
