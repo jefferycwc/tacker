@@ -427,13 +427,13 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             self.config_vnf(context, vnf_dict)
         self.spawn_n(create_vnf_wait)
         LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
-        pid=os.fork()
+        '''pid=os.fork()
         if pid == 0:
             LOG.debug('chid process pid :%s',os.getpid())
             #amf_detect.start_detect()
         else:
-            return vnf_dict
-        #return vnf_dict
+            return vnf_dict'''
+        return vnf_dict
     # not for wsgi, but for service to create hosting vnf
     # the vnf is NOT added to monitor.
     def create_vnf_sync(self, context, vnf):
