@@ -430,7 +430,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
                 self.add_vnf_to_monitor(context, vnf_dict)
             self.config_vnf(context, vnf_dict)
         self.spawn_n(create_vnf_wait)
-        LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
+        #LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
         '''def setMasterNode():
             amf_detect.main()
         thread = Thread(target=setMasterNode, kwargs={})
