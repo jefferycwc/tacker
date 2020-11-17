@@ -147,6 +147,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         self._vnf_alarm_monitor = monitor.VNFAlarmMonitor()
         self._vnf_app_monitor = monitor.VNFAppMonitor()
         self._init_monitoring()
+        self.amf_detect = amf_detect.AMF_detect()
 
     def _init_monitoring(self):
         context = t_context.get_admin_context()
@@ -371,6 +372,9 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             return
         vnf_dict['instance_id'] = instance_id
         return vnf_dict
+    def _judge():
+        LOG.debug('enter _judge')
+        self.amf_detect.start()
 
     def create_vnf(self, context, vnf):
         vnf_info = vnf['vnf']
@@ -436,7 +440,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
         def judge():
             LOG.debug('vnf description:%s',vnf_dict['description'])
-            amf_detect.start_detect()
+            self._judge()
 
         self.spawn_n(judge)
         return vnf_dict

@@ -6,7 +6,7 @@ from params.openstack_params import OPENSTACK_IP,OS_AUTH_URL,OS_USER_DOMAIN_NAME
 from PublishHandler import publisher
 from oslo_log import log as logging
 LOG = logging.getLogger(__name__)
-class OpenStackAPI():
+class AMF_detect():
     def __init__(self):
         #super().__init__()
         self.OPENSTACK_IP = OPENSTACK_IP
@@ -123,10 +123,14 @@ class OpenStackAPI():
         elif amf_status=='SUSPENDED' and self.lock==0:
             publisher(instance_id,'suspended','amf','report')
             self.lock=1
+    
+    def start(self):
+        LOG.debug('start to detect amf')
+        while 1:
+            self.amf_detect()
 
-
-def start_detect():
+'''def start_detect():
     test = OpenStackAPI()
     LOG.debug('enter amf detect')
     while 1:
-        test.amf_detect()
+        test.amf_detect()'''
