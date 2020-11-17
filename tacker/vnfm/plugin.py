@@ -432,7 +432,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
 
 
         #self.spawn_n(self.amf_detect.start())
-        pid = os.fork()
+        '''pid = os.fork()
         if pid==0:
             LOG.debug('child process pid:%s',os.getpid())
             os.chdir("/root/tacker/tacker/vnfm/master_node")
@@ -440,7 +440,8 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             #self.amf_detect.start()
         else:
             LOG.debug('vnf description:%s',vnf_dict['description'])
-            return vnf_dict
+            return vnf_dict'''
+        return vnf_dict
     # not for wsgi, but for service to create hosting vnf
     # the vnf is NOT added to monitor.
     def create_vnf_sync(self, context, vnf):
