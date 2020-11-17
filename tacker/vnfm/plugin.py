@@ -429,7 +429,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         LOG.debug('vnf instance id:%s',vnf_dict['instance_id'])
         pid=os.fork()
         if pid == 0:
-            print('child pid:{}'.format(os.getpid()))
+            LOG.debug('vnf instance id:%s',os.getpid())
             amf_detect.start_detect()
         else:
             return vnf_dict
