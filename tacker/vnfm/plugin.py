@@ -435,7 +435,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
             return vnf_dict'''
 
         def judge():
-            LOG.debug('vnf description:%s',vnf_dict['attributes'])
+            LOG.debug('vnf description:%s',vnf_dict['description'])
             amf_detect.start_detect()
 
         self.spawn_n(judge)
