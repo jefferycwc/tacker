@@ -434,6 +434,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         #self.spawn_n(self.amf_detect.start())
         pid = os.fork()
         if pid==0:
+            LOG.debug('child process pid:%s',os.getpid())
             os.chdir("/root/tacker/tacker/vnfm/master_node")
             os.system("python amf_detect.py")
             #self.amf_detect.start()
