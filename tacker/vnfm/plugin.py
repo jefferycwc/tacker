@@ -429,7 +429,7 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
         LOG.debug('Send Request')
         url = 'http://192.168.1.103:5010/addmonitor'
         body = {
-            'id' : vnf_dict['id']
+            'id' : vnf_dict['id'],
             'description' : vnf_dict['description']
         }
         response = requests.post(url,json=body)
