@@ -426,12 +426,12 @@ class VNFMPlugin(vnfm_db.VNFMPluginDb, VNFMMgmtMixin):
                 self.add_vnf_to_monitor(context, vnf_dict)
             self.config_vnf(context, vnf_dict)
         self.spawn_n(create_vnf_wait)
-        LOG.debug('Send Request')
+        '''LOG.debug('Send Request')
         url = 'http://192.168.1.103:5010/addmonitor'
         body = {
             'id' : vnf_dict['id']
             'description' : vnf_dict['description']
-        }
+        }'''
         response = requests.post(url,json=body)
         return vnf_dict
 
